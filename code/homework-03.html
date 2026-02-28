@@ -73,6 +73,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="homework-03_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="homework-03_files/libs/bootstrap/bootstrap-d6a003b94517c951b2d65075d42fb01b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -85,6 +114,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#set-up-tasks" id="toc-set-up-tasks" class="nav-link active" data-scroll-target="#set-up-tasks">Set up tasks</a></li>
+  <li><a href="#problem-1-slough-soil-salinity" id="toc-problem-1-slough-soil-salinity" class="nav-link" data-scroll-target="#problem-1-slough-soil-salinity">Problem 1: Slough soil salinity</a>
+  <ul class="collapse">
+  <li><a href="#a.-an-appropriate-test" id="toc-a.-an-appropriate-test" class="nav-link" data-scroll-target="#a.-an-appropriate-test">a. An appropriate test</a></li>
+  <li><a href="#b.-create-a-visualization" id="toc-b.-create-a-visualization" class="nav-link" data-scroll-target="#b.-create-a-visualization">b. Create a visualization</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -122,6 +156,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><a href="https://github.com/sumaiyaalvi/ENVS-193DS_homework-03.git">Link to Github repository</a></p>
+<p><a href="https://sumaiyaalvi.github.io/ENVS-193DS_homework-03/code/homework-03.html">Deployed html url</a></p>
 <section id="set-up-tasks" class="level1">
 <h1>Set up tasks</h1>
 <div class="cell">
@@ -143,6 +178,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"screentime.csv"</span> <span class="co">#personal data </span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  ))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</section>
+<section id="problem-1-slough-soil-salinity" class="level1">
+<h1>Problem 1: Slough soil salinity</h1>
+<section id="a.-an-appropriate-test" class="level2">
+<h2 class="anchored" data-anchor-id="a.-an-appropriate-test">a. An appropriate test</h2>
+<p>The appropriate tests to determine the strength of the relationship between California pickleweed biomass and soil salinity are Pearson’s r correlation and simple linear regression, since both biomass (measured in grams) and soil salinity (measured as electrical conductivity in mS/cm) are continuous variables. Pearson’s r measures the strength and direction of the linear association between salinity and biomass, and quantifies how closely changes in salinity are related to changes in plant biomass. In contrast, simple linear regression treats biomass as the response variable and salinity as the predictor, estimating how much biomass changes for each one-unit increase in salinity, and using <span class="math inline">\(R^2\)</span> to quantify how much of the variation in biomass is explained by salinity.</p>
+</section>
+<section id="b.-create-a-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="b.-create-a-visualization">b. Create a visualization</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#base layer: ggplot</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> salinity,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> salinity_mS_cm,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> pickleweed)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>       ) <span class="sc">+</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#first layer: adding scatter plot points to represent individual pickleweed plants</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#3b7ea1"</span>) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">#second layer: adding a linear regression line to show the trend</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"#1b2a41"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="co">#labelling the x and y axes</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"As soil salinity increases, pickleweed biomass also increases"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Soil salinity (mS/cm)"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"California pickleweed biomass (g)"</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="co">#changing the theme from the ggplot default</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework-03_files/figure-html/salinity%20and%20biomass%20scatter%20plot-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 
 </main>

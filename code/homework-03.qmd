@@ -42,5 +42,28 @@ screentime <- read_csv(
 
 The appropriate tests to determine the strength of the relationship between California pickleweed biomass and soil salinity are Pearson’s r correlation and simple linear regression, since both biomass (measured in grams) and soil salinity (measured as electrical conductivity in mS/cm) are continuous variables. Pearson’s r measures the strength and direction of the linear association between salinity and biomass, and quantifies how closely changes in salinity are related to changes in plant biomass. In contrast, simple linear regression treats biomass as the response variable and salinity as the predictor, estimating how much biomass changes for each one-unit increase in salinity, and using $R^2$ to quantify how much of the variation in biomass is explained by salinity.
 
-## b. 
+## b. Create a visualization
+
+```{r}
+#| label: salinity and biomass scatter plot
+
+#base layer: ggplot
+ggplot(data = salinity,
+       aes(x = salinity_mS_cm,
+           y = pickleweed)
+       ) +
+  #first layer: adding scatter plot points to represent individual pickleweed plants
+  geom_point(color = "#3b7ea1") +
+  #second layer: adding a linear regression line to show the trend
+  geom_smooth(method = "lm", color = "#1b2a41", se = TRUE) +
+  #labelling the x and y axes
+  labs(
+    title = "As soil salinity increases, pickleweed biomass also increases",
+    x = "Soil salinity (mS/cm)",
+    y = "California pickleweed biomass (g)"
+  ) +
+  #changing the theme from the ggplot default
+  theme_classic()
+```
+
 
