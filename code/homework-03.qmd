@@ -66,4 +66,65 @@ ggplot(data = salinity,
   theme_classic()
 ```
 
+## c. Check your assumptions and run test
+
+### Checking assumptions for simple linear regression
+
+**Assumption 1: Linearity**
+
+Linearity was assessed previously using the scatterplot with a fitted regression line in 1b. That plot shows a roughly straight-line trend, so the linearity assumption has been met. 
+
+**Assumption 2: Normality of residuals**
+
+```{r}
+#fitting linear regression model: biomass predicted by salinity
+sal_lm <- lm(pickleweed ~ salinity_mS_cm, data = salinity)
+
+#creating Q-Q plot of residuals
+ggplot(data = data.frame(resid = resid(sal_lm)),
+       aes(sample = resid)) +
+  geom_qq(color = "#3b7ea1") +
+  geom_qq_line() +
+  labs(
+    title = "Q-Q plot of regression residuals",
+    x = "Theoretical quantiles",
+    y = "Sample quantiles"
+  ) +
+  theme_light()
+```
+
+```{r}
+#Shapiro-Wilk test for normality of residuals
+shapiro.test(resid(sal_lm))
+```
+**Assumption 3: Homoscedasticity (constant variance)**
+
+```{r}
+#plotting residuals vs fitted values to assess constant variance
+ggplot(data = data.frame(fitted = fitted(sal_lm),
+                         resid = resid(sal_lm)),
+       aes(x = fitted, y = resid)) +
+  geom_point(color = "#3b7ea1") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(
+    title = "Residuals vs fitted values",
+    x = "Fitted biomass (g)",
+    y = "Residuals"
+  ) +
+  theme_light()
+```
+
+For the simple linear regression model showing the relationship between soil salinity (mS/cm) and pickleweed biomass (g), I checked the assumptions of linearity (previously assessed in the scatterplot in 1b), normality of residuals, and homoscedasticity. I evaluated normality using a Q–Q plot and a Shapiro–Wilk test of the residuals (p = 0.31), and I assessed constant variance using a residuals vs. fitted values plot. The linearity assumption was met, the Q–Q plot shows points falling approximately along the reference line, the Shapiro–Wilk test is not significant, and the residual plot shows no clear pattern or funnel shape, so the assumptions for simple linear regression appear reasonably met.
+
+### Running the test (simple linear regression)
+
+```{r}
+#displaying regression results
+summary(sal_lm)
+```
+
+
+
+
+
 

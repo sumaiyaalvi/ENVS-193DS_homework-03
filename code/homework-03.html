@@ -118,6 +118,11 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#a.-an-appropriate-test" id="toc-a.-an-appropriate-test" class="nav-link" data-scroll-target="#a.-an-appropriate-test">a. An appropriate test</a></li>
   <li><a href="#b.-create-a-visualization" id="toc-b.-create-a-visualization" class="nav-link" data-scroll-target="#b.-create-a-visualization">b. Create a visualization</a></li>
+  <li><a href="#c.-check-your-assumptions-and-run-test" id="toc-c.-check-your-assumptions-and-run-test" class="nav-link" data-scroll-target="#c.-check-your-assumptions-and-run-test">c.&nbsp;Check your assumptions and run test</a>
+  <ul class="collapse">
+  <li><a href="#checking-assumptions-for-simple-linear-regression" id="toc-checking-assumptions-for-simple-linear-regression" class="nav-link" data-scroll-target="#checking-assumptions-for-simple-linear-regression">Checking assumptions for simple linear regression</a></li>
+  <li><a href="#running-the-test-simple-linear-regression" id="toc-running-the-test-simple-linear-regression" class="nav-link" data-scroll-target="#running-the-test-simple-linear-regression">Running the test (simple linear regression)</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -213,6 +218,99 @@ window.Quarto = {
 </div>
 </div>
 </div>
+</section>
+<section id="c.-check-your-assumptions-and-run-test" class="level2">
+<h2 class="anchored" data-anchor-id="c.-check-your-assumptions-and-run-test">c.&nbsp;Check your assumptions and run test</h2>
+<section id="checking-assumptions-for-simple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="checking-assumptions-for-simple-linear-regression">Checking assumptions for simple linear regression</h3>
+<p><strong>Assumption 1: Linearity</strong></p>
+<p>Linearity was assessed previously using the scatterplot with a fitted regression line in 1b. That plot shows a roughly straight-line trend, so the linearity assumption has been met.</p>
+<p><strong>Assumption 2: Normality of residuals</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#fitting linear regression model: biomass predicted by salinity</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>sal_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(pickleweed <span class="sc">~</span> salinity_mS_cm, <span class="at">data =</span> salinity)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#creating Q-Q plot of residuals</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">resid =</span> <span class="fu">resid</span>(sal_lm)),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">sample =</span> resid)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq</span>(<span class="at">color =</span> <span class="st">"#3b7ea1"</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_qq_line</span>() <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Q-Q plot of regression residuals"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Theoretical quantiles"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Sample quantiles"</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework-03_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Shapiro-Wilk test for normality of residuals</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(<span class="fu">resid</span>(sal_lm))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Shapiro-Wilk normality test
+
+data:  resid(sal_lm)
+W = 0.95126, p-value = 0.3107</code></pre>
+</div>
+</div>
+<p><strong>Assumption 3: Homoscedasticity (constant variance)</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#plotting residuals vs fitted values to assess constant variance</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">data.frame</span>(<span class="at">fitted =</span> <span class="fu">fitted</span>(sal_lm),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">resid =</span> <span class="fu">resid</span>(sal_lm)),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> fitted, <span class="at">y =</span> resid)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"#3b7ea1"</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Residuals vs fitted values"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Fitted biomass (g)"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Residuals"</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="homework-03_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>For the simple linear regression model showing the relationship between soil salinity (mS/cm) and pickleweed biomass (g), I checked the assumptions of linearity (previously assessed in the scatterplot in 1b), normality of residuals, and homoscedasticity. I evaluated normality using a Q–Q plot and a Shapiro–Wilk test of the residuals (p = 0.31), and I assessed constant variance using a residuals vs.&nbsp;fitted values plot. The linearity assumption was met, the Q–Q plot shows points falling approximately along the reference line, the Shapiro–Wilk test is not significant, and the residual plot shows no clear pattern or funnel shape, so the assumptions for simple linear regression appear reasonably met.</p>
+</section>
+<section id="running-the-test-simple-linear-regression" class="level3">
+<h3 class="anchored" data-anchor-id="running-the-test-simple-linear-regression">Running the test (simple linear regression)</h3>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#displaying regression results</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sal_lm)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = pickleweed ~ salinity_mS_cm, data = salinity)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-12.499  -5.819  -1.726   4.794  21.765 
+
+Coefficients:
+               Estimate Std. Error t value Pr(&gt;|t|)   
+(Intercept)     13.0895     4.0350   3.244  0.00389 **
+salinity_mS_cm   2.0832     0.7188   2.898  0.00860 **
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 9.144 on 21 degrees of freedom
+Multiple R-squared:  0.2857,    Adjusted R-squared:  0.2517 
+F-statistic: 8.398 on 1 and 21 DF,  p-value: 0.008605</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 
