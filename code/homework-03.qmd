@@ -1,0 +1,40 @@
+---
+title: "homework-03"
+format: 
+  html:
+    toc: true # use this to display a table of contents
+execute:
+  message: false # use this to make sure messages don't show up
+  warning: false # use this to make sure warnings don't show up
+author: "Sumaiya Alvi"
+date: "2026-02-26"
+---
+
+[Link to Github repository](https://github.com/sumaiyaalvi/ENVS-193DS_homework-03.git)
+
+# Set up tasks
+
+```{r}
+#| label: load packages and data
+library(tidyverse) #general use
+library(here) #file organization
+library(janitor) #cleaning data frames
+library(readxl) #reading excel files
+
+
+salinity <- read_csv(
+  here( #allows you to write in file paths
+    "data", #folder
+    "salinity-pickleweed.csv" #salinity data
+  ))
+
+screentime <- read_csv(
+  here( 
+    "data", #data folder
+    "screentime.csv" #personal data 
+  ))
+```
+
+
+
+
