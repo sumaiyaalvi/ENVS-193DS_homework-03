@@ -12,6 +12,8 @@ date: "2026-02-26"
 
 [Link to Github repository](https://github.com/sumaiyaalvi/ENVS-193DS_homework-03.git)
 
+[Deployed html url](https://sumaiyaalvi.github.io/ENVS-193DS_homework-03/code/homework-03.html)
+
 # Set up tasks
 
 ```{r}
@@ -34,7 +36,11 @@ screentime <- read_csv(
     "screentime.csv" #personal data 
   ))
 ```
+# Problem 1: Slough soil salinity
 
+## a. An appropriate test
 
+The appropriate tests to determine the strength of the relationship between California pickleweed biomass and soil salinity are Pearson’s r correlation and simple linear regression, since both biomass (measured in grams) and soil salinity (measured as electrical conductivity in mS/cm) are continuous variables. Pearson’s r measures the strength and direction of the linear association between salinity and biomass, and quantifies how closely changes in salinity are related to changes in plant biomass. In contrast, simple linear regression treats biomass as the response variable and salinity as the predictor, estimating how much biomass changes for each one-unit increase in salinity, and using $R^2$ to quantify how much of the variation in biomass is explained by salinity.
 
+## b. 
 
