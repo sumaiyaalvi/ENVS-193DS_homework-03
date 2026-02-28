@@ -127,6 +127,10 @@ summary(sal_lm)
 
 To evaluate the strength of the relationship between California pickleweed biomass (g) and soil salinity (mS/cm), I used a simple linear regression because both variables are continuous and I wanted to quantify how biomass changes with increasing salinity. The results show a significant positive relationship, with biomass increasing by about 2.08 g for every 1 mS/cm increase in salinity (linear regression: slope = 2.08, $R^2$ = 0.29, p = 0.0086). This indicates that higher soil salinity is associated with greater pickleweed biomass, and salinity explains about 29% of the variation in biomass in this study.
 
+## e. Test implications
+
+Based on the results, pickleweed biomass tends to increase as soil salinity increases, which suggests that this species might perform better in more saline areas of the site. Since salinity explained about 29% of the variation in biomass, it seems like salinity is an important factor for planting success, although other factors are also likely influencing growth. For restoration planning, this means we may want to prioritize planting pickleweed in areas with higher salinity levels, while still considering other environmental conditions that could affect survival and growth.
+
 
 
 
