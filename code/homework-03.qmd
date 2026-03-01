@@ -12,7 +12,6 @@ date: "2026-02-26"
 
 [Link to Github repository](https://github.com/sumaiyaalvi/ENVS-193DS_homework-03.git)
 
-[Deployed html url](https://sumaiyaalvi.github.io/ENVS-193DS_homework-03/code/homework-03.html)
 
 # Set up tasks
 
@@ -131,7 +130,70 @@ To evaluate the strength of the relationship between California pickleweed bioma
 
 Based on the results, pickleweed biomass tends to increase as soil salinity increases, which suggests that this species might perform better in more saline areas of the site. Since salinity explained about 29% of the variation in biomass, it seems like salinity is an important factor for planting success, although other factors are also likely influencing growth. For restoration planning, this means we may want to prioritize planting pickleweed in areas with higher salinity levels, while still considering other environmental conditions that could affect survival and growth.
 
+## f. Double check your own work
 
+```{r}
+#conducting Pearson correlation test between soil salinity (mS/cm) and pickleweed biomass (g)
+cor.test(salinity$salinity_mS_cm,
+         salinity$pickleweed,
+         method = "pearson")
+```
 
+Pearson’s product–moment correlation measures the strength and direction of the linear relationship between soil salinity (mS/cm) and pickleweed biomass (g) using the correlation coefficient r. The results showed a moderate positive correlation (`r` = 0.53, `p` = 0.0086), meaning that biomass tends to increase as salinity increases. Since simple linear regression and Pearson’s correlation both test for a linear relationship between two continuous variables, they led to the same overall conclusion that there is a significant positive relationship between soil salinity and pickleweed biomass.
 
+# Problem 2: Personal data
+
+## Visualization 1: visualizing screen time across days of the week
+```{r}
+#finding most recent observation date
+most_recent_date <- max(screentime$Date)
+
+ggplot(data = screentime, #starting with my dataframe
+       aes(x = `Day of Week`, #x-axis: categorical variable
+           y = `Screen Time (hours)`, #y-axis: response variable
+           color = `Day of Week`)) + #coloring by day of week
+  geom_jitter(width = 0.15, #adding horizontal jitter
+              alpha = 0.7, #making points slightly transparent
+              size = 2) + #point size
+  labs(
+    x = "Day of Week",
+    y = "Screen Time (hours)", #changing axes labels
+    title = "Screen time by day of the week", #title summarizing main message,
+    #subtitle for most recent observation
+    subtitle = paste("Most recent observation:", most_recent_date)
+  ) + 
+  scale_color_manual( #changing colors from default
+    values = c("Monday" = "firebrick",
+               "Tuesday" = "darkorange",
+               "Wednesday" = "yellow3",
+               "Friday" = "green3",
+               "Saturday" = "blue4",
+               "Sunday" = "slateblue4")
+  ) +
+  theme_light() + #changing theme from default
+  theme(legend.position = "none") #removing legend
+```
+
+## Visualization 2: Screen time vs. Study time
+```{r}
+ggplot(data = screentime,
+       aes(x = `Class + Study time (hours)`, #x-axis: continuous predictor
+           y = `Screen Time (hours)`)) + #y-axis: response variable
+  geom_point(color = "darkorange", #changing color from default
+             size=2, #point size
+             alpha=0.8) + #adding transparency
+  #adding linear trend line to show pattern
+  geom_smooth(method = "lm",
+              color = "#014f86",
+              se = TRUE) +
+  labs(
+    x = "Class + Study Time (hours)", #labelling axes
+    y = "Screen Time (hours)",
+    #title summarizing main message
+    title = "Relationship between class/study time and screen time",
+    #subtitle for most recent observation
+    subtitle = paste("Most recent observation:", most_recent_date)
+  ) + 
+  theme_light() #using different theme from default
+```
 
