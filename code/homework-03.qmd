@@ -143,7 +143,9 @@ Pearson’s product–moment correlation measures the strength and direction of 
 
 # Problem 2: Personal data
 
-## Visualization 1: visualizing screen time across days of the week
+## a. Updating your visualizations
+
+### Visualization 1: visualizing screen time across days of the week
 ```{r}
 #finding most recent observation date
 most_recent_date <- max(screentime$Date)
@@ -174,7 +176,7 @@ ggplot(data = screentime, #starting with my dataframe
   theme(legend.position = "none") #removing legend
 ```
 
-## Visualization 2: Screen time vs. Study time
+### Visualization 2: Screen time vs. Study time
 ```{r}
 ggplot(data = screentime,
        aes(x = `Class + Study time (hours)`, #x-axis: continuous predictor
@@ -197,3 +199,8 @@ ggplot(data = screentime,
   theme_light() #using different theme from default
 ```
 
+## b. Captions
+
+**Figure 1.** Screen time (hours) across days of the week. Each point represents one daily observation, showing variation in screen use depending on the day. Screen time appears somewhat higher and more variable on weekends compared to some weekdays, suggesting that daily schedule may influence overall screen use.
+
+**Figure 2.** Relationship between class/study time (hours) and screen time (hours). Each point represents one day, with the line showing the overall linear trend. The slight negative trend suggests that on days with more class and/or study time, screen time tends to be slightly lower (although the relationship does not appear very strong).
