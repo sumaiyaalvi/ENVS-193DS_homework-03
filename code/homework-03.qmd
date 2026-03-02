@@ -204,3 +204,25 @@ ggplot(data = screentime,
 **Figure 1.** Screen time (hours) across days of the week. Each point represents one daily observation, showing variation in screen use depending on the day. Screen time appears somewhat higher and more variable on weekends compared to some weekdays, suggesting that daily schedule may influence overall screen use.
 
 **Figure 2.** Relationship between class/study time (hours) and screen time (hours). Each point represents one day, with the line showing the overall linear trend. The slight negative trend suggests that on days with more class and/or study time, screen time tends to be slightly lower (although the relationship does not appear very strong).
+
+# Problem 3: Affective visualization
+
+## a. Describe in words what an affective visualization could look like for your personal data
+
+An affective visualization of my personal screen time data could focus on showing how different days felt rather than just showing numerical patterns. For example, I could use color gradients to represent mood or energy levels based on sleep time the night before, with softer colors for well-rested days and darker/more intense colors for more tired days. This would make the data feel more personal and reflective rather than purely statistical.
+
+## b. Create a sketch (on paper) of your idea.
+
+![Affective visualization sketch](affective.png)
+
+
+
+
+
+
+
+
+
+
+
+
