@@ -246,9 +246,9 @@ The figure displays vegetation formations on the x-axis and percent cover of non
 
 The figure handles visual clutter pretty well, since it uses simple bars, limited color (solid black and hatched fill), and minimal background elements. The absence of grid lines and excessive labeling keeps the focus on the bar heights and error bars, which represent the main data. One point of contention is that the large difference in scale for the Grass/Meadow category visually dominates the figure, which may distract from more subtle differences among the forest types (however that's just a reflection of the data, and not a stylistic choice the authors made). 
 
-## d. 
+## d. Recommendations
 
-
+One recommendation would be to include individual data points overlaid on the bars (like jittered points) so readers can see the distribution within each vegetation formation, rather than only the group means. I would also clarify what the error bars represent (e.g., standard error or confidence intervals) directly in the figure caption to improve transparency. These changes could improve clarity while maintaining the overall structure of the figure.
 
 
 

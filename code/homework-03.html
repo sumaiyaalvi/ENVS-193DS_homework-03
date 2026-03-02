@@ -147,6 +147,9 @@ window.Quarto = {
   <li><a href="#problem-4-statistical-critique" id="toc-problem-4-statistical-critique" class="nav-link" data-scroll-target="#problem-4-statistical-critique">Problem 4: Statistical critique</a>
   <ul class="collapse">
   <li><a href="#a.-revisit-and-summarize" id="toc-a.-revisit-and-summarize" class="nav-link" data-scroll-target="#a.-revisit-and-summarize">a. Revisit and summarize</a></li>
+  <li><a href="#b.-visual-clarity" id="toc-b.-visual-clarity" class="nav-link" data-scroll-target="#b.-visual-clarity">b. Visual clarity</a></li>
+  <li><a href="#c.-aesthetic-clarity" id="toc-c.-aesthetic-clarity" class="nav-link" data-scroll-target="#c.-aesthetic-clarity">c.&nbsp;Aesthetic clarity</a></li>
+  <li><a href="#d.-recommendations" id="toc-d.-recommendations" class="nav-link" data-scroll-target="#d.-recommendations">d.&nbsp;Recommendations</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -492,6 +495,18 @@ sample estimates:
 <h2 class="anchored" data-anchor-id="a.-revisit-and-summarize">a. Revisit and summarize</h2>
 <p>The statistical test that the authors used is ANOVA. One response variable they tested was non-native species richness or percent cover of non-native species, and the predictor variable was a categorical group, such as vegetation formation (type of plant community) or whether the area was burnt vs.&nbsp;unburnt. ANOVA helps the authors answer their main question by testing whether the average amount of invasion by non-native plants is different across groups, such as burnt vs.&nbsp;unburnt areas or different vegetation formations. If the ANOVA result were significant, they would interpret it as evidence that the groups being compared have meaningfully different mean invasion levels, meaning fire status or vegetation type are associated with more (or less) non-native plant presence.</p>
 <p><img src="screenshot.png" class="img-fluid"></p>
+</section>
+<section id="b.-visual-clarity" class="level2">
+<h2 class="anchored" data-anchor-id="b.-visual-clarity">b. Visual clarity</h2>
+<p>The figure displays vegetation formations on the x-axis and percent cover of non-native species on the y-axis, which is a sensible orientation because it compares invasion levels across categorical habitat types. The use of side-by-side bars allows clear comparison between the two datasets (NRI shown as solid black bars and TNC shown as hatched bars), and the error bars provide information about variability around the means. However, because the figure only shows summary statistics (bar heights and error bars) and does not display individual data points, it is difficult to assess the spread or overlap of observations within each vegetation type.Overall, the visualization effectively communicates the main statistical comparison, but additional detail would improve transparency.</p>
+</section>
+<section id="c.-aesthetic-clarity" class="level2">
+<h2 class="anchored" data-anchor-id="c.-aesthetic-clarity">c.&nbsp;Aesthetic clarity</h2>
+<p>The figure handles visual clutter pretty well, since it uses simple bars, limited color (solid black and hatched fill), and minimal background elements. The absence of grid lines and excessive labeling keeps the focus on the bar heights and error bars, which represent the main data. One point of contention is that the large difference in scale for the Grass/Meadow category visually dominates the figure, which may distract from more subtle differences among the forest types (however that’s just a reflection of the data, and not a stylistic choice the authors made).</p>
+</section>
+<section id="d.-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="d.-recommendations">d.&nbsp;Recommendations</h2>
+<p>One recommendation would be to include individual data points overlaid on the bars (like jittered points) so readers can see the distribution within each vegetation formation, rather than only the group means. I would also clarify what the error bars represent (e.g., standard error or confidence intervals) directly in the figure caption to improve transparency. These changes could improve clarity while maintaining the overall structure of the figure.</p>
 </section>
 </section>
 
