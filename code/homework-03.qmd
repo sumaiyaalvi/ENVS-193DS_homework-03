@@ -219,9 +219,16 @@ An affective visualization of my personal screen time data could focus on showin
 
 ![Rough draft of affective visualization](draft.png)
 
+## d. Write an artist statement
 
+* **Content** This piece visualizes 32 days of my life from January 11 to February 28, tracking my screen time alongside class/study workload, sleep, social plans, and major academic deadlines. Each symbol represents one day in chronological order, allowing the viewer to see how different life factors overlap across time. Rather than focusing on one variable, the piece shows how busyness and screen time exist within a larger context of daily habits.
+* **Influences** I was inspired by Giorgia Lupi and Stefanie Posavec’s Dear Data project, especially their “Week of Goodbyes,” which uses hand-drawn symbols to encode personal experiences. Their work influenced my decision to create a symbolic system and to treat data as something personal and reflective. 
+* **Form** This work is a hand-drawn data visualization created using pen on paper. The grid format organizes the days chronologically, while variations in shape and fill communicate different levels of intensity. I think that the hand-drawn, imperfect quality of the drawing reinforces the personal nature of the data.
+* **Process** I first experimented with shapes that visually suggested different levels of intensity for screen time. Then, I designed fills to become denser on busier academic days, and added small annotations to indicate low sleep or major deadlines. Creating the piece manually required me to slow down and reflect on each day individually
 
+## e. Prep your materials to share in class.
 
+[View slides here](https://docs.google.com/presentation/d/1sdk43z4pUdYA65hGB7Zwmkd2F6LeWfc7S1Y1Jhuh4nw/edit?usp=sharing)
 
 
 
