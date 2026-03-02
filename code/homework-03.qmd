@@ -238,4 +238,19 @@ The statistical test that the authors used is ANOVA. One response variable they 
 
 ![](screenshot.png)
 
+## b. Visual clarity
+
+The figure displays vegetation formations on the x-axis and percent cover of non-native species on the y-axis, which is a sensible orientation because it compares invasion levels across categorical habitat types. The use of side-by-side bars allows clear comparison between the two datasets (NRI shown as solid black bars and TNC shown as hatched bars), and the error bars provide information about variability around the means. However, because the figure only shows summary statistics (bar heights and error bars) and does not display individual data points, it is difficult to assess the spread or overlap of observations within each vegetation type.Overall, the visualization effectively communicates the main statistical comparison, but additional detail would improve transparency.
+
+## c. Aesthetic clarity
+
+The figure handles visual clutter pretty well, since it uses simple bars, limited color (solid black and hatched fill), and minimal background elements. The absence of grid lines and excessive labeling keeps the focus on the bar heights and error bars, which represent the main data. One point of contention is that the large difference in scale for the Grass/Meadow category visually dominates the figure, which may distract from more subtle differences among the forest types (however that's just a reflection of the data, and not a stylistic choice the authors made). 
+
+## d. 
+
+
+
+
+
+
 
