@@ -217,7 +217,7 @@ An affective visualization of my personal screen time data could focus on showin
 
 ## c. Rough draft
 
-
+![Rough draft of affective visualization](draft.png)
 
 
 
