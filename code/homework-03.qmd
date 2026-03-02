@@ -230,6 +230,12 @@ An affective visualization of my personal screen time data could focus on showin
 
 [View slides here](https://docs.google.com/presentation/d/1sdk43z4pUdYA65hGB7Zwmkd2F6LeWfc7S1Y1Jhuh4nw/edit?usp=sharing)
 
+# Problem 4: Statistical critique
 
+## a. Revisit and summarize
+
+The statistical test that the authors used is ANOVA. One response variable they tested was non-native species richness or percent cover of non-native species, and the predictor variable was a categorical group, such as vegetation formation (type of plant community) or whether the area was burnt vs. unburnt. ANOVA helps the authors answer their main question by testing whether the average amount of invasion by non-native plants is different across groups, such as burnt vs. unburnt areas or different vegetation formations. If the ANOVA result were significant, they would interpret it as evidence that the groups being compared have meaningfully different mean invasion levels, meaning fire status or vegetation type are associated with more (or less) non-native plant presence.
+
+![](screenshot.png)
 
 
