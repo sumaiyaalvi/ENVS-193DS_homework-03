@@ -1,0 +1,53 @@
+---
+title: "Resubmission Request Homework 3"
+author: "Sumaiya Alvi"
+date: "March 9, 2026"
+output: pdf_document
+---
+
+# 1a
+
+1. The second test I mentioned to determine the strength of the relationship between salinity and California pickleweed biomass was incorrect (simple linear regression)
+2. The correct tests are Pearson's r correlation (which I included) and Spearman's rank correlation. 
+3. Replacing simple linear regression with Spearman's rank correlation would make my answer correct. While regression can describe a relationship, it's not usually viewed as a test of strength in the same way as Spearman's $\rho$ and Pearson's $r$.
+
+# 1c. 
+
+1. Since one of the tests I included in 1a was incorrect, I ended up checking the wrong assumptions (except for linearity), and running the wrong test.
+2. The assumptions I need to check for Pearson's $r$ correlation are linearity, continuous variables, independent observations, and that the variables are normally distributed. Then, I need to run the pearson's correlation test.
+3. This will improve my work because by using the correct test, I'm checking the appropriate assumptions and running the right test.
+
+# 1d. 
+
+1. Since my 1c was incorrect, my results were also incorrect.
+2. I can fix this by interpreting the right Pearson's correlation test results. I'll include distribution, degrees of freedom, p-value, and significance value in my response.
+3. This will improve the quality of my work because I'll be running a relevant test for the context of the question and then coming to the correct conclusions, too. 
+
+# 1e.
+
+1. Again, since I ran the wrong test initially, my resulting test implications response was not entirely correct. I included statistics from my linear regression model, which wasn't the correct avenue for me to get the correct answer.
+2. To fix this, I can remove the parts of my response that clearly indicate I ran a linear regression model, and replace those with Pearson's correlation equivalents (ie. moderate positive association).
+3. This will improve my response because the way in which I come to the appropriate test implications will be correct (Pearson's correlation test ran instead of linear regression model)
+
+# 1f.
+
+1. For this problem, I ran a Pearson's correlation test after a linear regression model, because I ran a wrong test to begin with. My process being incorrect also led to an unreliable response for whether or not the two tests led to the same conclusion, since I'm not comparing the correct two. 
+2. I was supposed to run a Spearman's correlation test after my Pearson's test. That would also change my written answer to whether or not the two tests would lead me to the same conclusion.
+3. This will improve the quality of my work because I'll be making the correct comparison, and using the correct statistics to compare and decide whether the Spearman's correlation and Pearson's correlation tests led to the same conclusion.
+
+# 2b.
+
+1. For this problem, I added geom_smooth to my second visualization, depicting screen time vs. study time in a jitter plot. That also led to a bad caption, because I referenced the line showing the overall trend.
+2. To fix it, I can first remove the geom_smooth line in my 2a visualization, and then fix my caption for 2b also. I shouldn't claim there's a linear trend when there is no obvious visual pattern without the line.
+3. This will improve my work because the caption will use the correct logic to explain the trend of my visualization, instead of fitting a regression line when I didn't run a regression model. 
+
+
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,7 @@ date: "2026-02-26"
 
 ```{r}
 #| label: load packages and data
+#| message: false
 library(tidyverse) #general use
 library(here) #file organization
 library(janitor) #cleaning data frames
@@ -39,7 +40,7 @@ screentime <- read_csv(
 
 ## a. An appropriate test
 
-The appropriate tests to determine the strength of the relationship between California pickleweed biomass and soil salinity are Pearson’s r correlation and simple linear regression, since both biomass (measured in grams) and soil salinity (measured as electrical conductivity in mS/cm) are continuous variables. Pearson’s r measures the strength and direction of the linear association between salinity and biomass, and quantifies how closely changes in salinity are related to changes in plant biomass. In contrast, simple linear regression treats biomass as the response variable and salinity as the predictor, estimating how much biomass changes for each one-unit increase in salinity, and using $R^2$ to quantify how much of the variation in biomass is explained by salinity.
+The appropriate tests to determine the strength of the relationship between California pickleweed biomass and soil salinity are Pearson’s correlation ($r$) and Spearman’s rank correlation ($\rho$), since both variables are continuous. Pearson’s r measures the strength and direction of the linear relationship between salinity and biomass. Spearman’s rank correlation measures the strength of a monotonic relationship between the variables and can be used when the assumptions of Pearson’s correlation, such as normality or linearity, are not met.
 
 ## b. Create a visualization
 
@@ -53,8 +54,6 @@ ggplot(data = salinity,
        ) +
   #first layer: adding scatter plot points to represent individual pickleweed plants
   geom_point(color = "#3b7ea1") +
-  #second layer: adding a linear regression line to show the trend
-  geom_smooth(method = "lm", color = "#1b2a41", se = TRUE) +
   #labelling the x and y axes
   labs(
     title = "As soil salinity increases, pickleweed biomass also increases",
@@ -67,79 +66,76 @@ ggplot(data = salinity,
 
 ## c. Check your assumptions and run test
 
-### Checking assumptions for simple linear regression
+### Checking assumptions for Pearson's $r$ correlation
 
 **Assumption 1: Linearity**
 
-Linearity was assessed previously using the scatterplot with a fitted regression line in 1b. That plot shows a roughly straight-line trend, so the linearity assumption has been met. 
+Linearity was assessed using the scatterplot created in 1b. The scatterplot shows a roughly straight-line pattern between soil salinity (mS/cm) and California pickleweed biomass (g), indicating that the linearity assumption is reasonably met.
 
-**Assumption 2: Normality of residuals**
+**Assumption 2: Continuous variables**
+
+Both variables used in the analysis are continuous. Soil salinity is measured as electrical conductivity in mS/cm, and pickleweed biomass is measured in grams.
+
+**Assumption 3: Normality of variables**
 
 ```{r}
-#fitting linear regression model: biomass predicted by salinity
-sal_lm <- lm(pickleweed ~ salinity_mS_cm, data = salinity)
-
-#creating Q-Q plot of residuals
-ggplot(data = data.frame(resid = resid(sal_lm)),
-       aes(sample = resid)) +
-  geom_qq(color = "#3b7ea1") +
-  geom_qq_line() +
+#histogram of soil salinity
+ggplot(salinity, aes(x = salinity_mS_cm)) +
+  geom_histogram(fill = "#3b7ea1", bins = 6) +
   labs(
-    title = "Q-Q plot of regression residuals",
-    x = "Theoretical quantiles",
-    y = "Sample quantiles"
+    title = "Distribution of soil salinity",
+    x = "Soil salinity (mS/cm)",
+    y = "Count"
+  ) +
+  theme_light()
+
+#histogram of pickleweed biomass
+ggplot(salinity, aes(x = pickleweed)) +
+  geom_histogram(fill = "#3b7ea1", bins = 6) +
+  labs(
+    title = "Distribution of pickleweed biomass",
+    x = "Pickleweed biomass (g)",
+    y = "Count"
   ) +
   theme_light()
 ```
+**Assumption 4: Independent observations**
+
+The observations represent different sampling locations in the study area, so they can reasonably be considered independent.
+
+I checked the assumptions of linearity and approximate normality for Pearson’s correlation. Linearity was assessed using the scatterplot created earlier, and normality was evaluated using histograms of soil salinity and pickleweed biomass. The scatterplot suggests a roughly linear relationship, and the histograms show no extreme skew, so the assumptions appear reasonably satisfied for using Pearson’s r. The observations are also independent, and the variables are continouous.
+
+### Running the test (Pearson's correlation)
 
 ```{r}
-#Shapiro-Wilk test for normality of residuals
-shapiro.test(resid(sal_lm))
-```
-**Assumption 3: Homoscedasticity (constant variance)**
-
-```{r}
-#plotting residuals vs fitted values to assess constant variance
-ggplot(data = data.frame(fitted = fitted(sal_lm),
-                         resid = resid(sal_lm)),
-       aes(x = fitted, y = resid)) +
-  geom_point(color = "#3b7ea1") +
-  geom_hline(yintercept = 0, linetype = "dashed") +
-  labs(
-    title = "Residuals vs fitted values",
-    x = "Fitted biomass (g)",
-    y = "Residuals"
-  ) +
-  theme_light()
-```
-
-For the simple linear regression model showing the relationship between soil salinity (mS/cm) and pickleweed biomass (g), I checked the assumptions of linearity (previously assessed in the scatterplot in 1b), normality of residuals, and homoscedasticity. I evaluated normality using a Q–Q plot and a Shapiro–Wilk test of the residuals (p = 0.31), and I assessed constant variance using a residuals vs. fitted values plot. The linearity assumption was met, the Q–Q plot shows points falling approximately along the reference line, the Shapiro–Wilk test is not significant, and the residual plot shows no clear pattern or funnel shape, so the assumptions for simple linear regression appear reasonably met.
-
-### Running the test (simple linear regression)
-
-```{r}
-#displaying regression results
-summary(sal_lm)
+cor.test(salinity$salinity_mS_cm, salinity$pickleweed,
+         method="pearson")
 ```
 
 ## d. Results
 
-To evaluate the strength of the relationship between California pickleweed biomass (g) and soil salinity (mS/cm), I used a simple linear regression because both variables are continuous and I wanted to quantify how biomass changes with increasing salinity. The results show a significant positive relationship, with biomass increasing by about 2.08 g for every 1 mS/cm increase in salinity (linear regression: slope = 2.08, $R^2$ = 0.29, p = 0.0086). This indicates that higher soil salinity is associated with greater pickleweed biomass, and salinity explains about 29% of the variation in biomass in this study.
+**Which test you used and why**
+To evaluate the strength of the relationship between California pickleweed biomass (g) and soil salinity (mS/cm), I used Pearson’s correlation because both variables are continuous and I wanted to measure the strength and direction of their linear association.
+
+**Interpretation of the test**
+The results show a moderate positive relationship, meaning that higher soil salinity tends to be associated with greater pickleweed biomass (Pearson’s r = 0.53, t(21) = 2.90, p = 0.0086). This suggests that as soil salinity increases, pickleweed biomass generally increases as well.
 
 ## e. Test implications
 
 Based on the results, pickleweed biomass tends to increase as soil salinity increases, which suggests that this species might perform better in more saline areas of the site. Since salinity explained about 29% of the variation in biomass, it seems like salinity is an important factor for planting success, although other factors are also likely influencing growth. For restoration planning, this means we may want to prioritize planting pickleweed in areas with higher salinity levels, while still considering other environmental conditions that could affect survival and growth.
 
+Based on the results, pickleweed biomass tends to increase as soil salinity increases, indicating a moderate positive association between the two variables. This suggests that areas with higher soil salinity may generally support greater pickleweed biomass at the site. For restoration planning, this means that planting pickleweed in more saline areas may improve planting success, although other environmental factors likely also influence growth.
+
 ## f. Double check your own work
 
 ```{r}
-#conducting Pearson correlation test between soil salinity (mS/cm) and pickleweed biomass (g)
+#conducting Spearman rank correlation test between soil salinity and pickleweed biomass
 cor.test(salinity$salinity_mS_cm,
          salinity$pickleweed,
-         method = "pearson")
+         method = "spearman")
 ```
 
-Pearson’s product–moment correlation measures the strength and direction of the linear relationship between soil salinity (mS/cm) and pickleweed biomass (g) using the correlation coefficient r. The results showed a moderate positive correlation (`r` = 0.53, `p` = 0.0086), meaning that biomass tends to increase as salinity increases. Since simple linear regression and Pearson’s correlation both test for a linear relationship between two continuous variables, they led to the same overall conclusion that there is a significant positive relationship between soil salinity and pickleweed biomass.
+Spearman’s rank correlation measures the strength and direction of a monotonic relationship between soil salinity (mS/cm) and pickleweed biomass (g) using ranked values of the variables. The Spearman test also showed a significant positive association between salinity and biomass (Spearman’s $\rho$ = 0.59, p = 0.0034). Because both Pearson’s correlation ($r$ = 0.53, p = 0.0086), which tests linear association, and Spearman’s correlation, which tests monotonic association, are significant and positive, both tests would lead to the same decision to reject the null hypothesis of no relationship between soil salinity and pickleweed biomass.
 
 # Problem 2: Personal data
 
@@ -184,17 +180,14 @@ ggplot(data = screentime,
   geom_point(color = "darkorange", #changing color from default
              size=2, #point size
              alpha=0.8) + #adding transparency
-  #adding linear trend line to show pattern
-  geom_smooth(method = "lm",
-              color = "#014f86",
-              se = TRUE) +
   labs(
     x = "Class + Study Time (hours)", #labelling axes
     y = "Screen Time (hours)",
     #title summarizing main message
     title = "Relationship between class/study time and screen time",
     #subtitle for most recent observation
-    subtitle = paste("Most recent observation:", most_recent_date)
+    subtitle = paste("Most recent observation:",
+                     most_recent_date)
   ) + 
   theme_light() #using different theme from default
 ```
@@ -203,7 +196,7 @@ ggplot(data = screentime,
 
 **Figure 1.** Screen time (hours) across days of the week. Each point represents one daily observation, showing variation in screen use depending on the day. Screen time appears somewhat higher and more variable on weekends compared to some weekdays, suggesting that daily schedule may influence overall screen use.
 
-**Figure 2.** Relationship between class/study time (hours) and screen time (hours). Each point represents one day, with the line showing the overall linear trend. The slight negative trend suggests that on days with more class and/or study time, screen time tends to be slightly lower (although the relationship does not appear very strong).
+**Figure 2.** Relationship between class/study time (hours) and screen time (hours). Each point represents one day of observations. The scatterplot shows how screen time varies across different amounts of class and study time, with no strong pattern immediately visible.
 
 # Problem 3: Affective visualization
 
